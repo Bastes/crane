@@ -1,5 +1,12 @@
-import App from './app';
-import React from 'react';
-import { render } from 'react-dom';
+var Spelling = require("./elm-sources/Spelling");
+var mountNode = document.getElementById('root');
+var app = Spelling.Spelling.embed(mountNode);
 
-render(<App />, document.getElementById('root'));
+function spellCheck(word) {
+  return ["toto", "tata", "tutu"];
+};
+
+app.ports.check.subscribe(function(word) {
+  var suggestions = spellCheck(word);
+  app.ports.suggestions.send(suggestions);
+});
