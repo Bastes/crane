@@ -1,3 +1,5 @@
+import styles from './stylus-sources/test.styl'
+
 var Spelling = require("./elm-sources/Spelling");
 var mountNode = document.getElementById('root');
 var app = Spelling.Spelling.embed(mountNode);

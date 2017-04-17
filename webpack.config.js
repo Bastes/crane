@@ -12,24 +12,34 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.elm'],
+    extensions: ['.js', '.jsx', '.elm', '.css'],
   },
   module: {
-    loaders: [
+    rules: [
+      {
+        test: /\.styl$/,
+        exclude: /(elm-stuff|node_modules|bower_components)/,
+        use: ['style-loader', 'css-loader', 'stylus-loader']
+      },
+      {
+        test: /\.css$/,
+        exclude: /(elm-stuff|node_modules|bower_components)/,
+        use: ['style-loader', 'css-loader']
+      },
       {
         test: /\.js$/,
         exclude: /(elm-stuff|node_modules|bower_components)/,
-        loaders: ["jsx-loader", "babel-loader"]
+        use: ["jsx-loader", "babel-loader"]
       },
       {
         test: /\.jsx$/,
         exclude: /(elm-stuff|node_modules|bower_components)/,
-        loaders: ["babel-loader"]
+        use: ["babel-loader"]
       },
       {
         test: /\.elm$/,
         exclude: /(elm-stuff|node_modules|bower_components)/,
-        loader: 'elm-webpack-loader'
+        use: ['elm-webpack-loader']
       }
     ]
   },
